@@ -5,7 +5,7 @@ import './App.css';
 class ItemDetails extends Component {
 	constructor(props) {
 		super(props);
-    this.state = { item: {}, text: '', comments: [] };
+    this.state = { item: {}, text: '' };
     this.change = this.change.bind(this);
 		this.submit = this.submit.bind(this);
 	}
@@ -42,7 +42,6 @@ class ItemDetails extends Component {
     if (!this.state.text.length) {
       return;
     }
-    
     localStorage.removeItem(this.state.item.text);
 
     let tempItem = this.state.item;
@@ -52,7 +51,7 @@ class ItemDetails extends Component {
 
 		localStorage.setItem(this.state.item.text + '', JSON.stringify(this.state.item));
 
-    this.setState(prevState => ({ text: '' }));
+    this.setState({ text: '' });
   }
 
   componentWillMount() {
@@ -61,14 +60,11 @@ class ItemDetails extends Component {
 
     while (i--) {
       if (JSON.parse(localStorage.getItem(keys[i])).id === +this.props.match.params.id) {
-        this.setState(prevState => ({
-          item: JSON.parse(localStorage.getItem(keys[i]))
-        }));
+        this.setState({ item: JSON.parse(localStorage.getItem(keys[i])) });
         break;
       }
     }
   }
-
 }
 
 class Comments extends React.Component {
@@ -76,7 +72,7 @@ class Comments extends React.Component {
     return (
       <ul className="comments">
         {this.props.comments.map((comment, i) => (
-          <li key={i} className="row">
+          <li key={i}>
             <div className="column left"><p className="cube"></p></div>
             <div className="column right"><p>{comment}</p></div>
           </li>

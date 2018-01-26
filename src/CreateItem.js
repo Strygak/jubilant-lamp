@@ -49,9 +49,7 @@ class CreateItem extends Component {
 
 		localStorage.setItem(this.state.text + '', JSON.stringify(newItem));
 
-    this.setState(prevState => ({
-      text: ''
-    }));
+    this.setState({ text: '' });
   }
 }
 
